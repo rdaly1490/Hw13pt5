@@ -34,36 +34,91 @@ function logIn(e) {
 		password:$pw.val()
 	};
 
+
 	if (emailNull) {
 		$("#bottom #container div").children().eq(2).html("Invalid Input: Username cannot be blank");
+		$("#bottom #container div").children().eq(6).html("");
 	}
 	else if (!email) {
 		$("#bottom #container div").children().eq(2).html("Invalid Input: Username must be a valid email address");
+		$("#bottom #container div").children().eq(6).html("");
 	}
 	else {
 		$("#bottom #container div").children().eq(2).html("");
 	}
 	if (passwordNull) {
 		$("#bottom #container div").children().eq(5).html("Invalid Input: Password cannot be blank");
+		$("#bottom #container div").children().eq(6).html("");
 	}
 	else {
 		$("#bottom #container div").children().eq(5).html("");
 	}
 
+
 	if (!emailNull && email && !passwordNull) {
 		for (var i=0; i<signInArray.length; i++) {
+
 			if (signInArray[i].username === inputObj.username && signInArray[i].password === inputObj.password) {
 				console.log("you did it!");
 			}
-			else if (signInArray[i].username === inputObj.username && signInArray[i].password !== inputObj.password) {
+			
+			else if (signInArray[i].username === inputObj.username && signInArray[i].password !== inputObj.password && inputObj.password !== null) {
 				$("#bottom #container div").children().eq(5).html("Incorrect Password, please try again");
+				$("#bottom #container div").children().eq(2).html("");
+				$("#bottom #container div").children().eq(6).html("");
+				console.log("working");
 			}
-			else if (signInArray[i].username !== inputObj.username && signInArray[i].password === inputObj.password) {
+			// else {
+			// 	$("#bottom #container div").children().eq(5).html("");
+			// }
+			else if (signInArray[i].username !== inputObj.username && signInArray[i].password === inputObj.password && inputObj.username !== null) {
 				$("#bottom #container div").children().eq(2).html("Username Not Found, please try again");
+				$("#bottom #container div").children().eq(5).html("");
+				$("#bottom #container div").children().eq(6).html("");
+			}
+			// else {
+			// 	$("#bottom #container div").children().eq(2).html("");
+			// }
+			else if (signInArray[i].username !== inputObj.username && signInArray[i].password !== inputObj.password  && inputObj.username !== null && inputObj.password !== null) {
+				$("#bottom #container div").children().eq(6).html("Incorrect Username and Password, please try again");
+				$("#bottom #container div").children().eq(2).html("");
+				$("#bottom #container div").children().eq(5).html("");
+			}
+			else {
+				$("#bottom #container div").children().eq(6).html("");
 			}
 
-		} 
-	}
+
+
+		}		
+	} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+	// if (!emailNull && email && !passwordNull) {
+		// for (var i=0; i<signInArray.length; i++) {
+		// 	if (signInArray[i].username === inputObj.username && signInArray[i].password === inputObj.password) {
+		// 		console.log("you did it!");
+		// 	}
+		// 	else if (signInArray[i].username === inputObj.username && signInArray[i].password !== inputObj.password) {
+		// 		$("#bottom #container div").children().eq(5).html("Incorrect Password, please try again");
+		// 	}
+		// 	else if (signInArray[i].username !== inputObj.username && signInArray[i].password === inputObj.password) {
+		// 		$("#bottom #container div").children().eq(2).html("Username Not Found, please try again");
+		// 	}
+
+		// } 
+	// }
 
 }
 
