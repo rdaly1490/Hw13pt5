@@ -12,7 +12,34 @@ var $signIn = $("#sign-in");
 $signIn.on("click", logIn);
 
 function logIn(e) {
-	
+	var email = validator.isEmail($user.val());
+	var signInArray = [{
+		username:"aaron@theironyard.com",
+		password:"password123"
+		},
+		{
+		username:"admin@google.com",
+		password:"pandas"
+		},
+		{
+		username:"rdaly1490@gmail.com",
+		password:"honeycrisp"
+		}];
+
+	var inputObj = {
+		username:$user.val(),
+		password:$pw.val()
+	};
+
+	for (var i=0; i<signInArray.length; i++) {
+		if (signInArray[i].username === inputObj.username && signInArray[i].password === inputObj.password) {
+			console.log("you did it!");
+		}
+	} 
+
+	// if (myObj.username === inputObj.username && myObj.password === inputObj.password) {
+	// 	console.log("hi there");
+	// }
 
 }
 
