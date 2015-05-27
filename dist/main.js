@@ -69,7 +69,7 @@ function logIn(e) {
 		$("#bottom #container div").children().eq(5).html("Password Incorrect, please try again");
 	}
 	else {
-		console.log("goooood!");
+		window.location.href="http://theironyard.com";
 	}
 
 
