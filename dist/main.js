@@ -13,6 +13,9 @@ $signIn.on("click", logIn);
 
 function logIn(e) {
 	var email = validator.isEmail($user.val());
+	var emailNull = validator.isNull($user.val());
+	var passwordNull = validator.isNull($pw.val());
+
 	var signInArray = [{
 		username:"aaron@theironyard.com",
 		password:"password123"
@@ -31,15 +34,36 @@ function logIn(e) {
 		password:$pw.val()
 	};
 
-	for (var i=0; i<signInArray.length; i++) {
-		if (signInArray[i].username === inputObj.username && signInArray[i].password === inputObj.password) {
-			console.log("you did it!");
-		}
-	} 
+	if (emailNull) {
+		$("#bottom #container div").children().eq(2).html("Invalid Input: Username cannot be blank");
+	}
+	else if (!email) {
+		$("#bottom #container div").children().eq(2).html("Invalid Input: Username must be a valid email address");
+	}
+	else {
+		$("#bottom #container div").children().eq(2).html("");
+	}
+	if (passwordNull) {
+		$("#bottom #container div").children().eq(5).html("Invalid Input: Password cannot be blank");
+	}
+	else {
+		$("#bottom #container div").children().eq(5).html("");
+	}
 
-	// if (myObj.username === inputObj.username && myObj.password === inputObj.password) {
-	// 	console.log("hi there");
-	// }
+	if (!emailNull && email && !passwordNull) {
+		for (var i=0; i<signInArray.length; i++) {
+			if (signInArray[i].username === inputObj.username && signInArray[i].password === inputObj.password) {
+				console.log("you did it!");
+			}
+			else if (signInArray[i].username === inputObj.username && signInArray[i].password !== inputObj.password) {
+				$("#bottom #container div").children().eq(5).html("Incorrect Password, please try again");
+			}
+			else if (signInArray[i].username !== inputObj.username && signInArray[i].password === inputObj.password) {
+				$("#bottom #container div").children().eq(2).html("Username Not Found, please try again");
+			}
+
+		} 
+	}
 
 }
 
@@ -104,6 +128,8 @@ $("#bottom div").css("color", "white");
 $(".img-responsive").css("height", "60%");
 $(".img-responsive").css("maxWidth", "100%");
 $(".img-responsive").css("display", "block");
+
+$("#bottom #container div p").css("color", "red");
 
 
 
